@@ -1,0 +1,51 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "react-hooks"],
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "semi": "error",
+    "sort-imports": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/jsx-closing-bracket-location": [
+      "error",
+      {
+        "nonEmpty": "tag-aligned",
+        "selfClosing": false
+      }
+    ],
+    "react/jsx-closing-tag-location": "error",
+    "no-extra-parens": 0,
+    "quotes": [2, "double"],
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "none"
+      }
+    ],
+    "no-underscore-dangle": 0,
+    "arrow-body-style": 0,
+    "one-var": [
+      "error",
+      {
+        "uninitialized": "always",
+        "initialized": "never"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  }
+}
