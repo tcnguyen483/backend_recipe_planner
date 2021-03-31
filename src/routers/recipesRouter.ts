@@ -9,7 +9,7 @@ const RecipesRouter = Router();
 
 RecipesRouter.route("/").get(Recipe.getRecipes).post(Recipe.createRecipe);
 RecipesRouter.route("/:id")
-  .get(Recipe.getRecipes)
+  .get(Recipe.getRecipe)
   .put(Recipe.updateRecipe)
   .delete(Recipe.deleteRecipe);
 

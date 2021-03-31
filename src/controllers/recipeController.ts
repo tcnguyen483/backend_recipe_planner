@@ -1,5 +1,5 @@
 /*
- * Controller for Recipe
+ * Controller for Recipe model. All functions related to Recipe are written here.
  */
 
 import Recipe, { IRecipe } from "../models/recipeModel";
@@ -23,7 +23,7 @@ export const createRecipe = async (req, res) => {
     });
 };
 
-export const getRecipes = (_req, res) => {
+export const getRecipes = async (_req, res) => {
   Recipe.find({})
     .then((result) => {
       res.send(result);
@@ -33,7 +33,7 @@ export const getRecipes = (_req, res) => {
     });
 };
 
-export const getRecipe = (req, res) => {
+export const getRecipe = async (req, res) => {
   Recipe.findOne({ name: req.params.id })
     .then((result) => {
       res.send(result);
@@ -43,7 +43,7 @@ export const getRecipe = (req, res) => {
     });
 };
 
-export const updateRecipe = (req, res) => {
+export const updateRecipe = async (req, res) => {
   const updates = req.body;
   Recipe.findOneAndUpdate({ name: req.params.id }, updates)
     .then((result) => {
@@ -54,7 +54,7 @@ export const updateRecipe = (req, res) => {
     });
 };
 
-export const deleteRecipe = (req, res) => {
+export const deleteRecipe = async (req, res) => {
   Recipe.findOneAndRemove({ name: req.params.id })
     .then((result) => {
       res.send(result);
