@@ -5,7 +5,6 @@
 
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser"; //allows us to get passed in api calls easily
 import routes from "./routers/routerIndex";
 import morgan from "morgan";
 import { connectDb } from "./models/modelsIndex";
@@ -26,8 +25,8 @@ const app = express();
 
 // Apply middleware
 app.use(cors(corsOptions));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // enable/disable http request logging
 app.use(morgan("dev"));
