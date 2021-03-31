@@ -34,7 +34,7 @@ export const getRecipes = async (_req, res) => {
 };
 
 export const getRecipe = async (req, res) => {
-  Recipe.findOne({ name: req.params.id })
+  Recipe.findOne({ _id: req.params.id })
     .then((result) => {
       res.send(result);
     })
@@ -45,7 +45,7 @@ export const getRecipe = async (req, res) => {
 
 export const updateRecipe = async (req, res) => {
   const updates = req.body;
-  Recipe.findOneAndUpdate({ name: req.params.id }, updates)
+  Recipe.findOneAndUpdate({ _id: req.params.id }, updates)
     .then((result) => {
       res.send(result);
     })
@@ -55,7 +55,7 @@ export const updateRecipe = async (req, res) => {
 };
 
 export const deleteRecipe = async (req, res) => {
-  Recipe.findOneAndRemove({ name: req.params.id })
+  Recipe.findOneAndRemove({ _id: req.params.id })
     .then((result) => {
       res.send(result);
     })
