@@ -5,7 +5,7 @@
 import mongoose from "mongoose";
 import Recipe from "./recipeModel";
 
-const mongoURI = process.env.MONGO_URI || "mongodb://localhost/recipeplanner";
+const mongoURI = process.env.MONGO_URI || "mongodb://localhost/pho";
 
 const connectDb = (): Promise<typeof mongoose> => {
   // Fix deprecation warnings https://mongoosejs.com/docs/deprecations.html

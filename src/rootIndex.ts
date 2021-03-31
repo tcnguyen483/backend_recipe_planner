@@ -10,7 +10,7 @@ import morgan from "morgan";
 import { connectDb } from "./models/modelsIndex";
 import * as dotenv from "dotenv";
 
-// initialize configuration
+// initialize dotenv configuration
 dotenv.config({ path: __dirname + "/.env" });
 
 const port = process.env.PORT || 9090;
@@ -36,12 +36,14 @@ app.get("/", (_req, res) => {
   return res.send("What are you trying to GET from the root?");
 });
 
-// Routers
+// Routers - add routes here as they are created
 app.use("/recipes", routes.RecipesRouter);
 
 // Connect to mongoDB and start the express server
-connectDb().then(() => {
-  app.listen(port, () =>
-    console.log(`RecipePlanner backend listening on port ${port}!`)
-  );
-});
+connectDb()
+  .then(() => {
+    app.listen(port, () =>
+      console.log(`RecipePlanner backend listening on port ${port}!`)
+    );
+  })
+  .catch((err) => console.log(err));
