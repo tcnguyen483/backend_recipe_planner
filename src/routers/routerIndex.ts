@@ -4,7 +4,9 @@
  */
 
 import RecipesRouter from "./recipesRouter";
+import UsersRouter from "./usersRouter";
 
 export default {
   RecipesRouter,
+  UsersRouter,
 };

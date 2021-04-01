@@ -38,6 +38,7 @@ app.get("/", (_req, res) => {
 
 // Routers - add routes here as they are created
 app.use("/recipes", routes.RecipesRouter);
+app.use("/users", routes.UsersRouter);
 
 // Connect to mongoDB and start the express server
 connectDb()
