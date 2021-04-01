@@ -1,7 +1,7 @@
 /*
  * Model for all recipes data
  */
-import { model, Schema, Document, Model } from "mongoose";
+import mongoose, { model, Schema, Document, Model } from "mongoose";
 
 export interface IRecipe extends Document {
   title: string;
@@ -51,6 +51,7 @@ export interface IRecipe extends Document {
   };
   tags: Array<string>;
   calories: number;
+  authorID: mongoose.Schema.Types.ObjectId;
   dateAdded: Date;
   sourceURL: string;
   description?: string;
@@ -105,6 +106,11 @@ const RecipeSchema = new Schema(
     },
     tags: [{ type: String }],
     calories: { type: Number },
+    authorID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     dateAdded: { type: Date, required: true },
     sourceURL: { type: String },
     description: { type: String },

@@ -11,6 +11,7 @@ export const createRecipe = async (req, res) => {
     instructions: req.body.instructions,
     tags: req.body.tags || null,
     calories: req.body.calories || null,
+    authorID: req.body.authorID,
     dateAdded: req.body.dateAdded || new Date(),
     sourceURL: req.body.sourceURL || null,
     description: req.body.description || null,
