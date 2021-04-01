@@ -50,6 +50,7 @@ export interface IRecipe extends Document {
     };
   };
   tags: Array<string>;
+  calories: number;
   dateAdded: Date;
   sourceURL: string;
   description?: string;
@@ -103,6 +104,7 @@ const RecipeSchema = new Schema(
       },
     },
     tags: [{ type: String }],
+    calories: { type: Number },
     dateAdded: { type: Date, required: true },
     sourceURL: { type: String },
     description: { type: String },
