@@ -49,6 +49,7 @@ export interface IRecipe extends Document {
       instructions: Array<string>;
     };
   };
+  tags: Array<string>;
   dateAdded: Date;
   sourceURL: string;
   description?: string;
@@ -101,6 +102,7 @@ const RecipeSchema = new Schema(
         instructions: [{ type: String }],
       },
     },
+    tags: [{ type: String }],
     dateAdded: { type: Date, required: true },
     sourceURL: { type: String },
     description: { type: String },

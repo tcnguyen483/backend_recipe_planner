@@ -9,6 +9,7 @@ export const createRecipe = async (req, res) => {
     title: req.body.title,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
+    tags: req.body.tags,
     dateAdded: req.body.dateAdded || new Date(),
     sourceURL: req.body.sourceURL || null,
     description: req.body.description || null,
