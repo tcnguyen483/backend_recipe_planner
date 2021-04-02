@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // define a route handler for the root page
-app.get("/", (_req, res) => {
+app.get("/", (req, res) => {
   return res.send("What are you trying to GET from the root?");
 });
 

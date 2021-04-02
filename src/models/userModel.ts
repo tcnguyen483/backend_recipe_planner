@@ -34,7 +34,7 @@ const UserSchema = new Schema(
     ],
     suffix: { type: String },
     username: { type: String, required: true },
-    dateJoined: { type: Date, required: true },
+    dateJoined: { type: Date, required: true, default: new Date() },
   },
   {
     toObject: { virtuals: true },
