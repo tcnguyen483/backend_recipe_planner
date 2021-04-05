@@ -9,10 +9,10 @@
     "start": "ts-node -r dotenv/config src/rootIndex.ts",
     "clean": "rimraf dist/*",
     "lint": "eslint '*/**/*.{ts,tsx}' --quiet --fix",
-    "build": "tsc --project ./",
+    "build": "tsc",
     "dev": "nodemon --watch src -e ts,ejs --exec yarn run dev:start",
     "script": "cd src/scripts && ts-node",
-    "prod": "yarn build; node dist/rootIndex.js"
+    "prod": "yarn build; node -r dotenv/config dist/rootIndex.ts"
   },
   "engines": {
     "node": ">=9",
