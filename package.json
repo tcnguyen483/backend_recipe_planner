@@ -12,7 +12,7 @@
     "build": "tsc",
     "dev": "nodemon --watch src -e ts,ejs --exec yarn run dev:start",
     "script": "cd src/scripts && ts-node",
-    "prod": "yarn build; node -r dotenv/config dist/rootIndex.ts"
+    "prod": "yarn build; node -r dotenv/config dist/rootIndex.js"
   },
   "engines": {
     "node": ">=12",
