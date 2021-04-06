@@ -9,6 +9,7 @@
     "start": "ts-node -r dotenv/config src/rootIndex.ts",
     "clean": "rimraf dist/*",
     "lint": "eslint '*/**/*.{ts,tsx}' --quiet --fix",
+    "tsc": "tsc",
     "build": "tsc",
     "dev": "nodemon --watch src -e ts,ejs --exec yarn run dev:start",
     "script": "cd src/scripts && ts-node",
