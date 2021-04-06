@@ -6,16 +6,9 @@ import User, { IUser } from "../models/userModel";
 
 export const createUser = async (req, res) => {
   const user: IUser = new User({
-    birthday: req.body.birthday || null,
-    email: req.body.email,
-    firstName: req.body.firstName,
-    hashedPass: req.body.hashedPass,
-    lastName: req.body.lastName,
-    phoneNumber: req.body.phoneNumber || null,
+    auth0ID: req.body.auth0id,
     savedRecipes: req.body.savedRecipes,
-    suffix: req.body.suffix || null,
-    username: req.body.username || null,
-    dateJoined: req.body.dateJoined,
+    recipeHistory: req.body.recipeHistory,
   });
   user
     .save()

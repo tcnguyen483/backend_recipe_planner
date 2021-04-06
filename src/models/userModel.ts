@@ -4,26 +4,18 @@
 import mongoose, { model, Schema, Document, Model } from "mongoose";
 
 export interface IUser extends Document {
-  birthday?: Date;
-  email: string;
-  firstName: string;
-  hashedPass: string;
-  lastName: string;
-  phoneNumber?: string;
+  auth0ID: string; // user->user_id in auth0 user profile
   savedRecipes: Array<mongoose.Schema.Types.ObjectId>;
-  suffix?: string;
-  username: string;
-  dateJoined: Date;
+  recipeHistory: Array<{
+    recipe: mongoose.Schema.Types.ObjectId;
+    date: Date;
+    meal: string;
+  }>;
 }
 
 const UserSchema = new Schema(
   {
-    birthday: { type: Date },
-    email: { type: String, required: true },
-    firstName: { type: String, required: true },
-    hashedPass: { type: String, required: true },
-    lastName: { type: String, required: true },
-    phoneNumber: { type: Number },
+    auth0ID: { type: String, required: true },
     savedRecipes: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -32,9 +24,18 @@ const UserSchema = new Schema(
         ref: "Recipe",
       },
     ],
-    suffix: { type: String },
-    username: { type: String, required: true },
-    dateJoined: { type: Date, required: true, default: new Date() },
+    recipeHistory: [
+      {
+        recipe: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          default: [] as Array<mongoose.Schema.Types.ObjectId>,
+          ref: "Recipe",
+        },
+        date: { type: Date, required: true },
+        meal: String,
+      },
+    ],
   },
   {
     toObject: { virtuals: true },
