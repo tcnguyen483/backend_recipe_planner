@@ -9,6 +9,8 @@ import routes from "./routers/routerIndex";
 import morgan from "morgan";
 import { connectDb } from "./models/modelsIndex";
 import * as dotenv from "dotenv";
+import jwt from "express-jwt";
+import jwks from "jwks-rsa";
 
 // initialize dotenv configuration
 dotenv.config({ path: __dirname + "/.env" });
@@ -23,7 +25,20 @@ const corsOptions = {
 
 const app = express();
 
+const jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: "https://recipe-planner.us.auth0.com/.well-known/jwks.json",
+  }),
+  audience: "https://recipe-planner-pho.herokuapp.com/",
+  issuer: "https://recipe-planner.us.auth0.com/",
+  algorithms: ["RS256"],
+});
+
 // Apply middleware
+app.use(jwtCheck);
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
