@@ -8,7 +8,11 @@ import cors from "cors";
 import morgan from "morgan";
 import { connectDb } from "./models/modelsIndex";
 import * as dotenv from "dotenv";
-import { checkJwt, usersScopes } from "./middleware/auth0.middleware";
+import {
+  checkJwt,
+  usersScopes,
+  recipesScopes,
+} from "./middleware/auth0.middleware";
 import * as User from "./controllers/userController";
 import * as Recipe from "./controllers/recipeController";
 
@@ -49,8 +53,18 @@ app.delete("/users/:id", checkJwt, usersScopes.deleteUser, User.deleteUser);
 app.get("/recipes/", Recipe.getRecipes);
 app.post("/recipes/", checkJwt, Recipe.createRecipe);
 app.get("/recipes/:id", Recipe.getRecipe);
-app.put("/recipes/:id", checkJwt, Recipe.updateRecipe);
-app.delete("/recipes/:id", checkJwt, Recipe.deleteRecipe);
+app.put(
+  "/recipes/:id",
+  checkJwt,
+  recipesScopes.updateRecipe,
+  Recipe.updateRecipe
+);
+app.delete(
+  "/recipes/:id",
+  checkJwt,
+  recipesScopes.deleteRecipe,
+  Recipe.deleteRecipe
+);
 
 // Connect to mongoDB and start the express server
 connectDb()

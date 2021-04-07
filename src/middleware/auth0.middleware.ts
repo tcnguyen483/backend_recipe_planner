@@ -26,3 +26,8 @@ export const usersScopes = {
   readCurrentUser: jwtAuthz(["read:current_user"]),
   updateCurrentUser: jwtAuthz(["read:current_user"]),
 };
+
+export const recipesScopes = {
+  deleteRecipe: jwtAuthz(["delete:recipe"]),
+  updateRecipe: jwtAuthz(["update:recipe"]),
+};
