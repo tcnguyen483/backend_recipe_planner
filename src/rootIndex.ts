@@ -47,10 +47,10 @@ app.delete("/users/:id", checkJwt, usersScopes.deleteUser, User.deleteUser);
 
 // ******************** RECIPES ROUTES ******************** //
 app.get("/recipes/", Recipe.getRecipes);
-app.post("/recipes/", Recipe.createRecipe);
+app.post("/recipes/", checkJwt, Recipe.createRecipe);
 app.get("/recipes/:id", Recipe.getRecipe);
-app.put("/recipes/:id", Recipe.updateRecipe);
-app.delete("/recipes/:id", Recipe.deleteRecipe);
+app.put("/recipes/:id", checkJwt, Recipe.updateRecipe);
+app.delete("/recipes/:id", checkJwt, Recipe.deleteRecipe);
 
 // Connect to mongoDB and start the express server
 connectDb()
