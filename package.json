@@ -23,6 +23,7 @@
   "repository": "git+https://github.com/tcnguyen483/backend_recipe_planner.git",
   "dependencies": {
     "@types/cors": "^2.8.10",
+    "@types/express-jwt": "^6.0.1",
     "@types/mongoose": "^5.10.4",
     "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.37",
@@ -30,6 +31,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "express-jwt-authz": "^2.4.1",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^2.0.2",
     "mongoose": "^5.12.3",

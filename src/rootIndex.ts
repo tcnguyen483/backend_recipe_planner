@@ -5,12 +5,12 @@
 
 import express from "express";
 import cors from "cors";
-import routes from "./routers/routerIndex";
 import morgan from "morgan";
 import { connectDb } from "./models/modelsIndex";
 import * as dotenv from "dotenv";
-import jwt from "express-jwt";
-import jwks from "jwks-rsa";
+import { checkJwt, usersScopes } from "./middleware/auth0.middleware";
+import * as User from "./controllers/userController";
+import * as Recipe from "./controllers/recipeController";
 
 // initialize dotenv configuration
 dotenv.config({ path: __dirname + "/.env" });
@@ -19,26 +19,13 @@ const port = process.env.PORT || 9090;
 
 // Configure CORS policy
 const corsOptions = {
-  origin: "*", // whitelisted origins
+  origin: "http://localhost:8080/*", // whitelisted origins
   optionsSuccessStatus: 200,
 };
 
 const app = express();
 
-const jwtCheck = jwt({
-  secret: jwks.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: "https://recipe-planner.us.auth0.com/.well-known/jwks.json",
-  }),
-  audience: "https://recipe-planner-pho.herokuapp.com/",
-  issuer: "https://recipe-planner.us.auth0.com/",
-  algorithms: ["RS256"],
-});
-
 // Apply middleware
-app.use(jwtCheck);
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -51,9 +38,19 @@ app.get("/", (req, res) => {
   return res.send("What are you trying to GET from the root?");
 });
 
-// Routers - add routes here as they are created
-app.use("/recipes", routes.RecipesRouter);
-app.use("/users", routes.UsersRouter);
+// ******************** USERS ROUTES ******************** //
+app.get("/users/", checkJwt, usersScopes.readAllUsers, User.getUsers);
+app.post("/users/", checkJwt, usersScopes.createUser, User.createUser);
+app.get("/users/:id", checkJwt, usersScopes.readCurrentUser, User.getUser);
+app.put("/users/:id", checkJwt, usersScopes.updateCurrentUser, User.updateUser);
+app.delete("/users/:id", checkJwt, usersScopes.deleteUser, User.deleteUser);
+
+// ******************** RECIPES ROUTES ******************** //
+app.get("/recipes/", Recipe.getRecipes);
+app.post("/recipes/", Recipe.createRecipe);
+app.get("/recipes/:id", Recipe.getRecipe);
+app.put("/recipes/:id", Recipe.updateRecipe);
+app.delete("/recipes/:id", Recipe.deleteRecipe);
 
 // Connect to mongoDB and start the express server
 connectDb()
