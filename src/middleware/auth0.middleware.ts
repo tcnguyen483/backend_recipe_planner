@@ -1,4 +1,6 @@
-// Middleware definitions for auth0
+/*
+ * Middleware definitions for auth0
+ */
 
 import jwt from "express-jwt";
 import jwks from "jwks-rsa";
