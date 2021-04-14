@@ -23,7 +23,7 @@ const port = process.env.PORT || 9090;
 
 // Configure CORS policy
 const corsOptions = {
-  origin: "http://localhost:8080/*", // whitelisted origins
+  origin: "http://localhost:8080", // whitelisted origins
   optionsSuccessStatus: 200,
 };
 
