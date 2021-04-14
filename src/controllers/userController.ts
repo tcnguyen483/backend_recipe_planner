@@ -31,7 +31,7 @@ export const getUsers = async (_req, res) => {
 };
 
 export const getUser = async (req, res) => {
-  User.findOne({ _id: req.params.id })
+  User.findOne({ auth0ID: req.params.auth0ID })
     .then((result) => {
       res.send(result);
     })
