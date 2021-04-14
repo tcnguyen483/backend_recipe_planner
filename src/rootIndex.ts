@@ -45,9 +45,19 @@ app.get("/", (req, res) => {
 // ******************** USERS ROUTES ******************** //
 app.get("/users/", checkJwt, usersScopes.readAllUsers, User.getUsers);
 app.post("/users/", checkJwt, usersScopes.createUser, User.createUser);
-app.get("/users/:id", checkJwt, usersScopes.readCurrentUser, User.getUser);
-app.put("/users/:id", checkJwt, usersScopes.updateCurrentUser, User.updateUser);
-app.delete("/users/:id", checkJwt, usersScopes.deleteUser, User.deleteUser);
+app.get("/users/:auth0ID", checkJwt, usersScopes.readCurrentUser, User.getUser);
+app.put(
+  "/users/:auth0ID",
+  checkJwt,
+  usersScopes.updateCurrentUser,
+  User.updateUser
+);
+app.delete(
+  "/users/:auth0ID",
+  checkJwt,
+  usersScopes.deleteUser,
+  User.deleteUser
+);
 
 // ******************** RECIPES ROUTES ******************** //
 app.get("/recipes/", Recipe.getRecipes);
