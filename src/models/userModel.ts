@@ -5,9 +5,9 @@ import mongoose, { model, Schema, Document, Model } from "mongoose";
 
 export interface IUser extends Document {
   auth0ID: string; // user->user_id in auth0 user profile
-  savedRecipes: Array<mongoose.Schema.Types.ObjectId>;
+  savedRecipeIDs: Array<mongoose.Schema.Types.ObjectId>;
   recipeHistory: Array<{
-    recipe: mongoose.Schema.Types.ObjectId;
+    recipeID: mongoose.Schema.Types.ObjectId;
     date: Date;
     meal: string;
   }>;
@@ -16,7 +16,7 @@ export interface IUser extends Document {
 const UserSchema = new Schema(
   {
     auth0ID: { type: String, required: true },
-    savedRecipes: [
+    savedRecipeIDs: [
       {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -26,7 +26,7 @@ const UserSchema = new Schema(
     ],
     recipeHistory: [
       {
-        recipe: {
+        recipeID: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
           default: [] as Array<mongoose.Schema.Types.ObjectId>,

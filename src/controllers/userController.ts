@@ -6,8 +6,8 @@ import User, { IUser } from "../models/userModel";
 
 export const createUser = async (req, res) => {
   const user: IUser = new User({
-    auth0ID: req.body.auth0id,
-    savedRecipes: req.body.savedRecipes,
+    auth0ID: req.body.auth0ID,
+    savedRecipeIDs: req.body.savedRecipeIDs,
     recipeHistory: req.body.recipeHistory,
   });
   user
