@@ -5,19 +5,23 @@
 import User, { IUser } from "../models/userModel";
 
 export const createUser = async (req, res) => {
-  const user: IUser = new User({
-    auth0ID: req.body.auth0ID,
-    savedRecipeIDs: req.body.savedRecipeIDs,
-    recipeHistory: req.body.recipeHistory,
-  });
-  user
-    .save()
-    .then((result) => {
-      res.status(200).json({ message: result });
-    })
-    .catch((error) => {
-      res.status(500).json({ error });
+  if (!User.findOne({ auth0ID: req.body.auth0ID })) {
+    const user: IUser = new User({
+      auth0ID: req.body.auth0ID,
+      savedRecipeIDs: req.body.savedRecipeIDs,
+      recipeHistory: req.body.recipeHistory,
     });
+    user
+      .save()
+      .then((result) => {
+        res.status(200).json({ message: result });
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
+  } else {
+    res.status(505).json({ message: "User with this auth0ID already exists!" });
+  }
 };
 
 export const getUsers = async (_req, res) => {
