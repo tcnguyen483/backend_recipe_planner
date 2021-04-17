@@ -5,7 +5,7 @@
 import User, { IUser } from "../models/userModel";
 
 export const createUser = async (req, res) => {
-  const user = User.findOne({ auth0ID: req.body.auth0ID });
+  const user = await User.findOne({ auth0ID: req.body.auth0ID });
   if (!user) {
     const newUser: IUser = new User({
       auth0ID: req.body.auth0ID,
