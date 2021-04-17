@@ -47,8 +47,7 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const updates = req.body;
-  console.log(updates);
-  User.findOneAndUpdate({ _id: req.params.id }, updates)
+  User.findOneAndUpdate({ auth0ID: req.params.id }, updates)
     .then((result) => {
       res.send(result);
     })
