@@ -46,19 +46,21 @@ export const getUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const updates = req.body;
-  User.findOneAndUpdate({ auth0ID: req.params.id }, updates)
-    .then((result) => {
-      console.log(result);
-      res.send(result);
-    })
-    .catch((error) => {
-      res.status(503).json({ error });
-    });
+  try {
+    const updates = req.body;
+    const updatedUser = await User.findOneAndUpdate(
+      { auth0ID: req.params.auth0ID },
+      updates
+    );
+    console.log(updatedUser);
+    res.send(updatedUser);
+  } catch (error) {
+    res.status(503).json({ error });
+  }
 };
 
 export const deleteUser = async (req, res) => {
-  User.findOneAndRemove({ _id: req.params.id })
+  User.findOneAndRemove({ auth0ID: req.params.auth0ID })
     .then((result) => {
       res.send(result);
     })
