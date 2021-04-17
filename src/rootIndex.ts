@@ -49,7 +49,7 @@ app.get("/users/:auth0ID", checkJwt, usersScopes.readCurrentUser, User.getUser);
 app.put(
   "/users/:auth0ID",
   checkJwt,
-  [usersScopes.updateCurrentUser, usersScopes.readCurrentUser],
+  usersScopes.updateCurrentUser,
   User.updateUser
 );
 app.delete(
